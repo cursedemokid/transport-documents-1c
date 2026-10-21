@@ -90,7 +90,7 @@ class IncomingRequisitesTests(NetworkGuardTestCase):
         self.assertEqual(result.status, "already_filled")
 
     def test_zero_padded_saby_number_is_the_same_document(self):
-        """Saby отдаёт «4323110109», бухгалтер записал «4726385» — это один УПД.
+        """Saby отдаёт «0004726385», бухгалтер записал «4726385» — это один УПД.
 
         На бэкфилле за восемь месяцев так набиралось семь ложных конфликтов из
         девяти, а конфликт — стоп-условие при раскатке записи.
@@ -100,7 +100,7 @@ class IncomingRequisitesTests(NetworkGuardTestCase):
         )
 
         result = validate_before_write(
-            saby_doc(incoming_number="4323110109"), filled, _found(), _context()
+            saby_doc(incoming_number="0004726385"), filled, _found(), _context()
         )
 
         self.assertEqual(result.status, "already_filled")
